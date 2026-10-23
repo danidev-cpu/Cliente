@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contador de Palabras</title>
+    </head>
+    <body>
+        <h1>Resultado del conteo de palabras</h1>
+        <div id="resultado"></div>
+
+        <script>
+            // Función que recibe las palabras y devuelve un Map con la frecuencia de cada una
+            function contarPalabras(palabras) {
+                const mapaFrecuencias = new Map();
+
+                for (const palabra of palabras) {
+                    const cantidadActual = mapaFrecuencias.get(palabra) || 0;
+                    mapaFrecuencias.set(palabra, cantidadActual + 1);
+                }
+
+                return mapaFrecuencias;
+            }
+
+            function pedirPalabras() {
+                let palabra;
+                const palabrasUsuario = [];
+
+                // Pedir palabras hasta cancelar o dejar vacío
+                do {
+                    palabra = window.prompt(
+                        "Introduce una palabra. Vacío o cancelar detiene el proceso.",
+                    );
+
+                    // Verificamos que no sea null ni string vacío (tras quitar espacios)
+                    if (palabra && palabra.trim() !== "") {
+                        palabrasUsuario.push(palabra.trim());
+                    }
+                } while (palabra && palabra.trim() !== "");
+
+                // Obtener el mapa de frecuencias mediante la función
+                const mapaResultado = contarPalabras(palabrasUsuario);
+
+                // Mostrar resultados por pantalla (DOM)
+                const contenedor = document.getElementById("resultado");
+
+                if (mapaResultado.size === 0) {
+                    contenedor.textContent = "No se introdujo ninguna palabra.";
+                    return;
+                }
+
+                const lista = document.createElement("ul");
+                mapaResultado.forEach((frecuencia, palabra) => {
+                    const elemento = document.createElement("li");
+                    elemento.textContent = `"${palabra}": ${frecuencia} vez/veces`;
+                    lista.appendChild(elemento);
+                });
+
+                contenedor.appendChild(lista);
+            }
+
+            // Ejecutar la aplicación
+            pedirPalabras();
+        </script>
+    </body>
+</html>
