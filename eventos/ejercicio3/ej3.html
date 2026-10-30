@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ejercicio 1 - Eventos</title>
+    </head>
+    <body>
+        <p id="parrafo1">Borrame1</p>
+        <p id="parrafo2">Borrame2</p>
+        <p id="parrafo3">Borrame3</p>
+
+        <button type="button" onclick="window.location.href = 'ej3.html'">
+            Resetea
+        </button>
+
+        <script>
+            let parrafo1 = document.getElementById("parrafo1");
+            let parrafo2 = document.getElementById("parrafo2");
+            let parrafo3 = document.getElementById("parrafo3");
+
+            parrafo1.addEventListener("click", () => {
+                parrafo1.style.display = "none";
+                console.log(parrafo1);
+            });
+            parrafo2.addEventListener("click", () => {
+                parrafo2.style.display = "none";
+            });
+            parrafo3.addEventListener("click", () => {
+                parrafo3.style.display = "none";
+            });
+        </script>
+    </body>
+</html>
