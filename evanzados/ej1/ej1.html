@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ejercicio1</title>
+    </head>
+    <body>
+        <form id="formulario-nombre">
+            <label for="nombre">Tu nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
+            <button type="submit">Guardar</button>
+        </form>
+        <p id="bienvenida" hidden></p>
+
+        <script>
+            const formulario = document.getElementById("formulario-nombre");
+            const campoNombre = document.getElementById("nombre");
+            const mensajeBienvenida = document.getElementById("bienvenida");
+
+            function mostrarBienvenida(nombre) {
+                formulario.hidden = true;
+                mensajeBienvenida.textContent = `¡Bienvenido/a, ${nombre}!`;
+                mensajeBienvenida.hidden = false;
+            }
+
+            const cookieNombre = document.cookie
+                .split("; ")
+                .find((cookie) => cookie.startsWith("nombre="));
+
+            if (cookieNombre) {
+                mostrarBienvenida(
+                    decodeURIComponent(cookieNombre.slice("nombre=".length)),
+                );
+            }
+
+            formulario.addEventListener("submit", (evento) => {
+                evento.preventDefault();
+
+                const nombre = campoNombre.value.trim();
+                if (!nombre) {
+                    campoNombre.focus();
+                    return;
+                }
+
+                document.cookie = `nombre=${encodeURIComponent(nombre)}; max-age=604800; path=/; samesite=lax`;
+                mostrarBienvenida(nombre);
+            });
+        </script>
+    </body>
+</html>

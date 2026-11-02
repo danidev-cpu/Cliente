@@ -1,3 +1,3 @@
 Repo github: https://github.com/danidev-cpu/Cliente/tree/main/eventos
 
-Github pages:
+Github pages: https://danidev-cpu.github.io/Cliente/
