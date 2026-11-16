@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Practica 1</title>
+    </head>
+    <body>
+        <p id="resultado"></p>
+        <script>
+            function generarTemporizador(ms) {
+                return new Promise((resolve, reject) => {
+                    let bien = setTimeout(() => {
+                        resolve("Tiempo concluido");
+                    }, ms);
+                    let mal = setTimeout(() => {
+                        resolve("El tiempo no va bien");
+                    }, ms);
+                });
+            }
+            let result = document.getElementById("resultado");
+            generarTemporizador(1000)
+                .then((mensaje) => {
+                    result.textContent = mensaje;
+                })
+                .catch((error) => {
+                    result.textContent = error;
+                });
+        </script>
+    </body>
+</html>
